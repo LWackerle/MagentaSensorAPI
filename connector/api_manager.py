@@ -1,11 +1,10 @@
 import requests
 from datetime import datetime
 
-class API_Manager:
 
+class API_Manager:
     def __init__(self, base_url):
         self.base_url = base_url
-
 
     # Public Methods
     def update_device_status(self, device_id, occupied):
@@ -15,13 +14,15 @@ class API_Manager:
             "last_update": datetime.utcnow()
         }
         url = self.base_url+'/devices'
-        params = {'query': {
-            "device_id":device_id,
-            "$mongoose": {
-                'upsert':True
+        params = {
+            'query': {
+                "device_id": device_id,
+                "$mongoose": {
+                    'upsert': True
+                }
             }
-        }},
-        return requests.patch(url,json=device, params = params)
+        }
+        return requests.patch(url, json=device, params=params)
 
     def add_to_history(self, device_id, occupied, gateway):
         device = {
