@@ -20,6 +20,14 @@ services:
         networks:
             - connector_to_database
             - database_to_api
+    api:
+        build: ./api/
+        container_name: api
+        restart: always
+        networks:
+            - database_to_api
+        port:
+            - "80:8000"
 networks:
     connector_to_database:
         driver: bridge
