@@ -1,16 +1,11 @@
 import sys
 import paho.mqtt.client as mqtt
-from db_manager import DB_Manager
+from api_manager import API_Manager
 import json
 
-# initialize database connection
-try:
-    db = DB_Manager("mongodb://database:27017", "magentadesk")
-    print("Connection to database established.")
-except Exception as e:
-    print("Connection to database failed.")
-    print(e)
-    sys.exit(1)
+# initialize api
+
+api = API_Manager("http://api")
 
 # initiate client
 client = mqtt.Client('test')
@@ -34,8 +29,8 @@ def on_message(client, userdata, message):
     elif payload["payload_fields"]["occupied"] == 49:
         occupied = True
 
-    db.update_device_status(dev_id, occupied)
-    db.add_to_history(dev_id, occupied, gateway)
+    api.update_device_status(dev_id, occupied)
+    api.add_to_history(dev_id, occupied, gateway)
 
 
 def on_connect(client, userdata, flags, rc):

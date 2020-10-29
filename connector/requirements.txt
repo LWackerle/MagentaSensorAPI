@@ -1,3 +1,4 @@
 ## python packages required for connector
 paho-mqtt
 pymongo
+requests
