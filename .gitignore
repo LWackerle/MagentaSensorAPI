@@ -75,7 +75,7 @@ docs/_build/
 target/
 
 # Jupyter Notebook
-Testing/.ipynb_checkpoints
+connector/testing_archive/.ipynb_checkpoints
 
 # IPython
 profile_default/

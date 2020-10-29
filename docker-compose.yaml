@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+    connector:
+        restart: always
+        build: ./connector/
+        container_name: connector
+        networks:
+            - connector_to_database
+    database:
+        image: mongo:3.6.6
+        container_name: database
+        restart: always
+        ports:
+            - "27017-27019:27017-27019"
+        volumes:
+            - /home/ubuntu/MagentaSensorPlatform/database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+            - /home/ubuntu/app/database/dbdata:/data/db
+        networks:
+            - connector_to_database
+            - database_to_api
+networks:
+    connector_to_database:
+        driver: bridge
+    database_to_api:
+        driver: bridge
+
