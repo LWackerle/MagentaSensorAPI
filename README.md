@@ -1,1 +1,1 @@
-# MagentaSensorAPI
+# MagentaSensorPlatform
