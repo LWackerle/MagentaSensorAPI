@@ -5,7 +5,7 @@ import json
 
 # initialize database connection
 try:
-    db = DB_Manager("mongodb://localhost:27017", "magentadesk")
+    db = DB_Manager("mongodb://database:27017", "magentadesk")
     print("Connection to database established.")
 except Exception as e:
     print("Connection to database failed.")
