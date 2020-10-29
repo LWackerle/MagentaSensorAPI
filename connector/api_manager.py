@@ -14,15 +14,7 @@ class API_Manager:
             "last_update": datetime.utcnow().isoformat()
         }
         url = self.base_url+'/devices'
-        params = {
-            'query': {
-                "device_id": device_id,
-                "$mongoose": {
-                    'upsert': True
-                }
-            }
-        }
-        return requests.patch(url, json=device, params=params)
+        return requests.post(url, json=device)
 
     def add_to_history(self, device_id, occupied, gateway):
         device = {
