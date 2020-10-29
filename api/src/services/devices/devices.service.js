@@ -1,19 +1,20 @@
 // Initializes the `devices` service on path `/devices`
-const { Devices } = require('./devices.class');
-const createModel = require('../../models/devices.model');
-const hooks = require('./devices.hooks');
+const { Devices } = require("./devices.class");
+const createModel = require("../../models/devices.model");
+const hooks = require("./devices.hooks");
 
 module.exports = function (app) {
   const options = {
     Model: createModel(app),
-    paginate: app.get('paginate')
+    paginate: app.get("paginate"),
+    id: "device_id",
   };
 
   // Initialize our service with any options it requires
-  app.use('/devices', new Devices(options, app));
+  app.use("/devices", new Devices(options, app));
 
   // Get our initialized service so that we can register hooks
-  const service = app.service('devices');
+  const service = app.service("devices");
 
   service.hooks(hooks);
 };
