@@ -11,7 +11,7 @@ class API_Manager:
         device = {
             "device_id": device_id,
             "occupied": occupied,
-            "last_update": datetime.utcnow()
+            "last_update": datetime.utcnow().isoformat()
         }
         url = self.base_url+'/devices'
         params = {
@@ -27,7 +27,7 @@ class API_Manager:
     def add_to_history(self, device_id, occupied, gateway):
         device = {
             "device_id": device_id,
-            "timestamp": datetime.utcnow(),
+            "timestamp": datetime.utcnow().isoformat(),
             "occupied": occupied,
             "gateway": gateway
         }
