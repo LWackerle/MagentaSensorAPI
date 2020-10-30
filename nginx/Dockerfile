@@ -9,7 +9,7 @@ COPY ./webinterface/*.json ./
 RUN npm install
 
 # Prepare for production build
-COPY public /usr/src/app/public
+COPY ./webinterface/public /usr/src/app/public
 COPY src /usr/src/app/src
 
 # Build the webapp
