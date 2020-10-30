@@ -1,36 +1,47 @@
-version: '3.8'
+version: "3.8"
 services:
-    connector:
-        restart: always
-        environment:
-            - PYTHONUNBUFFERED=1
-        build: ./connector/
-        container_name: connector
-        networks:
-            - connector_to_api
-    database:
-        image: mongo:3.6.6
-        container_name: database
-        restart: always
-        ports:
-            - "27017-27019:27017-27019"
-        volumes:
-            - /home/ubuntu/MagentaSensorPlatform/database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
-            - /home/ubuntu/app/database/dbdata:/data/db
-        networks:
-            - database_to_api
-    api:
-        build: ./api/
-        container_name: api
-        restart: always
-        networks:
-            - database_to_api
-            - connector_to_api
-        ports:
-            - "80:8000"
-networks:
-    connector_to_api:
-        driver: bridge
-    database_to_api:
-        driver: bridge
+  connector:
+    build: ./connector/
+    container_name: connector
+    restart: always
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - connector
+  database:
+    image: mongo:3.6.6
+    container_name: database
+    restart: always
+    ports:
+      - "27017-27019:27017-27019"
+    volumes:
+      - /home/ubuntu/MagentaSensorPlatform/database/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+      - /home/ubuntu/app/database/dbdata:/data/db
+    networks:
+      - database
+  api:
+    build: ./api/
+    container_name: api
+    restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - database
+      - nginx
+      - connector
+  nginx:
+    build: ./nginx/
+    container_name: nginx
+    restart: always
+    ports:
+      - "80:80"
+    networks:
+      - nginx
 
+networks:
+  nginx:
+    driver: bridge
+  connector:
+    driver: bridge
+  database:
+    driver: bridge
