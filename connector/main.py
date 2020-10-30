@@ -5,7 +5,7 @@ import json
 
 # initialize api
 
-api = API_Manager("http://api")
+api = API_Manager("http://api:8000/")
 
 # initiate client
 client = mqtt.Client('test')
