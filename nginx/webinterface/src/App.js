@@ -1,4 +1,18 @@
+import React, { useEffect, useState } from "react";
+import api from "./api";
+
 function App() {
+  const [devices, setDevices] = useState([]);
+  const getDevices = async () => {
+    const { data } = await api.service("devices").find();
+    console.log(data);
+    setDevices(data);
+  };
+
+  useEffect(() => {
+    getDevices();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -6,17 +20,14 @@ function App() {
           src={`${process.env.PUBLIC_URL}/logo512.png`}
           className="App-logo"
         />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        {devices.map((d) => {
+          console.log(d);
+          return (
+            <div key={d.device_id}>
+              {d.device_id} - {d.occupied ? "Besetzt" : "Nicht besetzt"}
+            </div>
+          );
+        })}
       </header>
     </div>
   );
