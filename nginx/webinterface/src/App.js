@@ -2,7 +2,10 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={`${process.env.PUBLIC_URL}/logo.svg`} className="App-logo" />
+        <img
+          src={`${process.env.PUBLIC_URL}/logo512.png`}
+          className="App-logo"
+        />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

@@ -35,8 +35,6 @@ services:
     restart: always
     ports:
       - "80:80"
-    environment:
-      - PUBLIC_URL=/webinterface
     networks:
       - nginx
 
