@@ -10,7 +10,7 @@ RUN npm install
 
 # Prepare for production build
 COPY ./webinterface/public /usr/src/app/public
-COPY src /usr/src/app/src
+COPY ./webinterface/src /usr/src/app/src
 
 # Build the webapp
 RUN npm run build
@@ -27,8 +27,5 @@ COPY ./nginx.conf /etc/nginx/nginx.conf
 
 # Get webapp files from previous step (see PART 1)
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html/webapp
-
-# Get landing-page files
-COPY ./webinterface/ /usr/share/nginx/html/webinterface/
 
 EXPOSE 80
