@@ -5,7 +5,7 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 # Install all used packages
-COPY *.json ./
+COPY ./webinterface/*.json ./
 RUN npm install
 
 # Prepare for production build
