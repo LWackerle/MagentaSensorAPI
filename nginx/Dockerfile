@@ -24,6 +24,7 @@ RUN mkdir -p /usr/share/nginx/webinterface
 
 # COPY all needed nginx related files (config & ssl)
 COPY ./nginx.conf /etc/nginx/nginx.conf
+COPY ./mime.types /etc/nginx/mime.types
 
 # Get webapp files from previous step (see PART 1)
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html/webinterface
